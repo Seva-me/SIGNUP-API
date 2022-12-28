@@ -1,5 +1,7 @@
 'use strict';
 
+const { sequelize } = require('../models');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -9,7 +11,9 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.addColumn('students', 'color',{ type: Sequelize.STRING});
+    await queryInterface.changeColumn('students','marks',{
+      type:Sequelize.INTEGER
+    });
   },
 
   async down (queryInterface, Sequelize) {
@@ -19,6 +23,8 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.removeColumn('students','color')
+    await queryInterface.changeColumn('students','marks',{
+      type:Sequelize.STRING
+    });
   }
 };

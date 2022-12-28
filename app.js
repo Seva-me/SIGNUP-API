@@ -5,21 +5,42 @@ const jwt=require('jsonwebtoken')
 require('dotenv').config()
 const port=process.env.PORT;
 
+const addressIndex=require('./controller/address/addressindex');
+app.use('/',addressIndex);
+
+const studentIndex=require('./controller/student/studentIndex')
+app.use('/',studentIndex);
+
+const joinIndex=require('./controller/student/studentIndex')
+app.use('/',joinIndex);
+
+const updateStudentindex=require('./controller/student/studentIndex')
+app.use('/',updateStudentindex);
+
+// const selectquery=require('./route/sign');
+// app.use("/rawdata",selectquery);
+
+// const insertaddress=require('./route/sign');
+// app.use('/insertaddressData',insertaddress);
+
+// const insertstudent=require('./route/sign');
+// app.use('/insertstudentData',insertstudent);
+
+// const updateStudents=require('./route/sign');
+// app.use("/updatestudent",updateStudents)
 
 
-// const f1=require('./middleware/mid')
+// const updateaddress=require('./route/sign');
+// app.use("/updateaddressdata",updateaddress)
 
-// app.use(f1)
+// const getData=require('./route/sign');
+// app.use('/',getData);
 
-const get_data=require('./route/sign');
-app.use('/',get_data);
+// const sqlResults=require('./route/sign');
+// app.use('/qry',sqlResults)
 
-const sqlResults=require('./route/sign');
-app.use('/qry',sqlResults)
-
-const post_data=require('./route/sign')
-app.use('/post',post_data)
-
+// const postData=require('./route/sign')
+// app.use('/post',postData)
 
 app.listen(port,()=>{
     console.log("server is running at  ",port)

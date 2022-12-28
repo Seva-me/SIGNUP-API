@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     name: {type:DataTypes.STRING,allowNull: false},
-    marks: {type:DataTypes.STRING,allowNull: false},
+    marks: {type:DataTypes.INTEGER,allowNull: false},
+    roll: {type:DataTypes.INTEGER,allowNull: false},
     subject: {type:DataTypes.STRING,allowNull: false},
     age: {type:DataTypes.INTEGER,allowNull: false},
     createdAt: DataTypes.DATE,
