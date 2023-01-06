@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // address.associate = function (models) {address.belongsTo(models.student, { foreignKey: 'student_id'})};
-      address.belongsTo(models.student,{foreignKey:'student_id'});
+      address.hasOne(models.student,{foreignKey:'address_id'});
     }
   }
   address.init({
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     pincode: {type: DataTypes.INTEGER,allowNull: false},
     city: {type: DataTypes.STRING,allowNull: false},
     house_no:{type: DataTypes.STRING,allowNull: false},
-    student_id:{type: DataTypes.INTEGER,allowNull: false},
+    // student_id:{type: DataTypes.INTEGER,allowNull: false},
     address_live: DataTypes.BOOLEAN,
     createdAt: {allowNull: false,type: DataTypes.DATE,defaultValue: sequelize.literal('NOW()')},
     updatedAt: {allowNull: false,type: DataTypes.DATE,defaultValue: sequelize.literal('NOW()')}

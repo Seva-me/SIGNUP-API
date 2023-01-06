@@ -87,40 +87,72 @@ async function studentDetail(req, res) {
 
 async function studentDatabysequelizequery(req, res) {
     try {
+        let result;
         switch (req.query.data) {
             case 'studentwithaddress':
-                const studentData = await studentModel.student.findAll({
-                    include: [{
-                        model: studentModel.address,
-                        // where:{student_id:{[Op.is]:null}}
-                        required:true
-                    }]
-                });
-                return res.status(200).json(studentData);
-            case 'studentwithid':
-                const studentWithnoaddress= await studentModel.student.findAll({
-                    include: [{
-                        model: studentModel.address,
-                        where:{
-                            student_id:req.query.id
+                result = await studentModel.student.findAll({
+                    attributes: ['first_name', 'last_name'],
+                    where: {
+                        address_id:
+                        {
+                            [Op.ne]: null
                         }
-                    }]
-                });
-                return res.status(200).json(studentWithnoaddress);
-            case 'studentwith':
-                const studentWithid = await studentModel.student.findone({
-                    where:{
-                        id:request.query.id
                     },
-                    include:[{
+                    include: [{
                         model: studentModel.address,
+                        // its a left join
                     }]
                 });
-                return res.status(200).json(studentWithid);
+                break;
+            case 'studentwithid':
+                result = await studentModel.student.findAll({
+                    where: {
+                        id: req.query.id
+                    },
+                    include: [{
+                        model: studentModel.address,
+                        required: false,
+                        // left join
+                    }]
+                });
+                break;
+            case 'studentwithnoaddress':
+                result = await studentModel.student.findAll({
+                    attributes: ['first_name', 'last_name'],
+                    where: {
+                        address_id:
+                        {
+                            [Op.is]: null
+                        }
+                    },
+                });
+                break;
+            case "python":
+                result = await studentModel.student.findAll({
+                    attributes: ['id', 'first_name', 'last_name'],
+                    include: [{
+                        model: studentModel.course,
+                        where: { course_name: 'python' },
+                        attributes: ['id', 'course_price', 'course_name']
+                    }],
+                });
+                break;
+            case 'studentwithnocourse':
+                result = await studentModel.student.findAll({
+                    where: {
+                        course_id: {
+                            [Op.is]: null
+                        }
+                    },
+                    attributes:['first_name', 'last_name']
+                });
+                break;
             default:
                 return res.status(500).send("something went wrong");
-        }
-    } catch (err) {
+        } 
+        return res.status(200).json(result)   
+    } 
+    catch (err) {
         console.log(err)
         res.status(500).send("something went wrong");
     }
