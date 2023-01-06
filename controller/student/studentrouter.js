@@ -7,5 +7,6 @@ const validator = require('../../middlewares/validator');
 
 router.post('/insertstudentdata',validator(studentSchema.insertStudentschema),studentControll.insertStudentdata);
 router.put('/updatestudentdata',validator(studentSchema.updatestudentSchemas),studentControll.updateStudent);
-router.get('/getDetails',validator(studentSchema.detailSchemas),studentControll.studentDetail);
+router.get('/getStudentdetails',validator(studentSchema.studentDetailschemas),studentControll.studentDetail);
+router.get('/studentDetails',validator(studentSchema.studentbySequelizequerychema),studentControll.studentDatabysequelizequery);
 module.exports=router

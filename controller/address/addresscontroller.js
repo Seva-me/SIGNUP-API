@@ -10,6 +10,7 @@ async function insertAddressdata(req, res) {
         if (dataInserted) {
             return res.status(200).send('Data is inserted into address table ');
         }
+        return res.status(500).send('server error');
     } catch (err) {
         return res.status(500).send('something went wrong');
     }

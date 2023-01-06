@@ -9,29 +9,43 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      first_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      marks: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      subject: {
+      last_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+      },
+      roll: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      school_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      blood_group: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      address_id:{
+        type:Sequelize.INTEGER,
+        foreignKey:true
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()")
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("NOW()")
       }
     });
   },
@@ -39,4 +53,3 @@ module.exports = {
     await queryInterface.dropTable('students');
   }
 };
-
