@@ -6,7 +6,7 @@ const insertStudentData=joi.object().keys({
     age:joi.number().integer().min(5).max(45).required(),
     roll:joi.number().integer().required(),
     school_name:joi.string().pattern(new RegExp(pattern.namePattern)).required(),
-    blood_group:joi.string().pattern(new RegExp(bloodGroupPattern)).required(),
+    blood_group:joi.string().pattern(new RegExp(pattern.bloodGroupPattern)).required(),
     address_id:joi.number().integer().required()
 });
 
@@ -17,7 +17,7 @@ const updateStudentData=joi.object().keys({
     age:joi.number().integer().min(5).max(45),
     roll:joi.number().integer(),
     school_name:joi.string().pattern(new RegExp(pattern.namePattern)),
-    blood_group:joi.string().pattern(new RegExp(bloodGroupPattern)),
+    blood_group:joi.string().pattern(new RegExp(pattern.bloodGroupPattern)),
     address_id:joi.number().integer(),
     id:joi.number().integer().required()
 }).min(3);
