@@ -4,7 +4,7 @@ const addressControll=require("./addresscontroller");
 const addresSchema=require('./addressschema');
 const validator=require('../../middlewares/validator');
 
-router.post("/insertAddressdetails",validator(addresSchema.addressSchema),addressControll.insertAddressdata);
-router.put("/updateAddressdata",validator(addresSchema.updateaddresSchema),addressControll.updateAddress);
+router.post("/insertAddressdetails",validator(addresSchema.insertAddressData),addressControll.insertAddressData);
+router.put("/updateAddressdata",validator(addresSchema.updateAddressData),addressControll.updateAddressData);
 
 module.exports=router

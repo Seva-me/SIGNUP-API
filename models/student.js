@@ -27,15 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     roll:{type:DataTypes.INTEGER,unique:true,allowNull: false,},
     school_name: {type:DataTypes.STRING,allowNull: false},
     blood_group: {type:DataTypes.STRING,allowNull: false},
-    createdAt: {allowNull: false,type: DataTypes.DATE,defaultValue: sequelize.literal('NOW()')},
-    updatedAt: {allowNull: false,type: DataTypes.DATE,defaultValue: sequelize.literal('NOW()')}
+    createdAt: {allowNull: false,type: DataTypes.DATE},
+    updatedAt: {allowNull: false,type: DataTypes.DATE}
   }, 
   {
     sequelize,
     modelName: 'student',
+    timestamps: true
   });
-  // const student=sequelize.define('student');
-  // const adddress=
-  // student.associate = function(models){student.hasOne(models.address, {foreignkey:'student_id'})};
   return student;
 };

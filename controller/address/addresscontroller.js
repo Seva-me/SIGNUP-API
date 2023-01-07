@@ -4,7 +4,7 @@ const { QueryTypes } = require('sequelize');
 
 
 
-async function insertAddressdata(req, res) {
+async function insertAddressData(req, res) {
     try {
         const dataInserted = await datadb.sequelize.query('insert into addresses(state,district,pincode,city,house_no,address_live)values(?,?,?,?,?,?)', { replacements: [req.body.state, req.body.district, req.body.pincode, req.body.city, req.body.houseno, req.body.addresslive], type: QueryTypes.INSERT });
         if (dataInserted) {
@@ -17,7 +17,7 @@ async function insertAddressdata(req, res) {
 }
 
 
-async function updateAddress(req, res) {
+async function updateAddressData(req, res) {
     try {
         let updateQuery;
         switch (req.body.data) {
@@ -55,6 +55,6 @@ async function updateAddress(req, res) {
 
 
 module.exports = {
-    insertAddressdata,
-    updateAddress
+    insertAddressData,
+    updateAddressData
 }

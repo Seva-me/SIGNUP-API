@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 const { request } = require('express');
 
 
-async function insertStudentdata(req, res) {
+async function insertStudentData(req, res) {
     try {
         const dataInserted = await datadb.sequelize.query('insert into students (first_name,last_name,age,roll,school_name,blood_group,address_id) values(?,?,?,?,?,?,?)', { replacements: [req.body.first_name, req.body.last_name, req.body.age, req.body.roll, req.body.school_name, req.body.blood_group, req.body.address_id], type: QueryTypes.INSERT });
         console.log(dataInserted)
@@ -85,7 +85,7 @@ async function studentDetail(req, res) {
     }
 }
 
-async function studentDatabysequelizequery(req, res) {
+async function studentDataBySequelizeQuery(req, res) {
     try {
         let result;
         switch (req.query.data) {
@@ -127,16 +127,6 @@ async function studentDatabysequelizequery(req, res) {
                     },
                 });
                 break;
-            case "python":
-                result = await studentModel.student.findAll({
-                    attributes: ['id', 'first_name', 'last_name'],
-                    include: [{
-                        model: studentModel.course,
-                        where: { course_name: 'python' },
-                        attributes: ['id', 'course_price', 'course_name']
-                    }],
-                });
-                break;
             case 'studentwithnocourse':
                 result = await studentModel.student.findAll({
                     where: {
@@ -144,24 +134,84 @@ async function studentDatabysequelizequery(req, res) {
                             [Op.is]: null
                         }
                     },
-                    attributes:['first_name', 'last_name']
+                    attributes: ['first_name', 'last_name']
                 });
                 break;
             default:
                 return res.status(500).send("something went wrong");
-        } 
-        return res.status(200).json(result)   
-    } 
+        }
+        // return res.status(200).json(result)   
+        if (result.length === 0) {
+            return res.status(204).send("data not found");
+        }
+        return res.status(200).json(result);
+    }
     catch (err) {
         console.log(err)
         res.status(500).send("something went wrong");
     }
 }
 
+async function courseDetailsBySequelizeQuery(req, res) {
+    let arrayList = JSON.parse(req.query.course);
+    result = await studentModel.student.findAll({
+        attributes: ['first_name', 'last_name'],
+        include: [{
+            model: studentModel.course,
+            where: {
+                id: {
+                    [Op.in]: arrayList
+                }
+            },
+            attributes: ['id', 'course_price', 'course_name']
+        }],
+    });
+    if(result.length === 0){
+        return res.status(204).send("data not found");
+    }
+    return res.status(200).json(result);
+    // try{
+    // let result;
+    // console.log(req.query.course);
+    // 
+    // switch(req.query.data){
+    //     case 'course':
+    //         result = await studentModel.student.findAll({
+    //             attributes: ['id', 'first_name', 'last_name'],
+    //             include: [{
+    //                 model: studentModel.course,
+    //                 where: { course_name: req.query.course },
+    //                 attributes: ['id', 'course_price', 'course_name']
+    //              }],});
+    //              break;       
+    // case 'allcourse':
+    //     result = await studentModel.course.findAll();
+    //     console.log(result)
+    //     break;
+    // attributes: ['id', 'course_price', 'course_name'],
+    // include: [{
+    //     model: studentModel.student,
+    //     // where: { course_name: req.query.course },
+    //  }],});
+    // default:
+    //     return res.status(500).send("server error")         
+    // };
+    // if(result.length === 0){
+    //     return res.status(204).send("data not found");
+    // }
+    // return res.status(200).json(result);
+    // } catch(err){
+    //     return res.status(500).send("something went wrong");
+    // }
+}
+
+
+
 
 module.exports = {
-    insertStudentdata,
+    insertStudentData,
     updateStudent,
     studentDetail,
-    studentDatabysequelizequery
+    studentDataBySequelizeQuery,
+    courseDetailsBySequelizeQuery
 }
