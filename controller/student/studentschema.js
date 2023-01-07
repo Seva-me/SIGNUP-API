@@ -27,7 +27,7 @@ const studentDetail=joi.object().keys({
     id:joi.number()
 });
 
-const studentBySequelizeQuery=joi.object().keys({
+const studentDataBySequelizeQuery=joi.object().keys({
     data:joi.string().pattern(new RegExp(dataPattern)).required(),
     id:joi.number()
 });
@@ -41,6 +41,6 @@ module.exports={
     insertStudentData,
     updateStudentData,
     studentDetail,
-    studentBySequelizeQuery,
+    studentDataBySequelizeQuery,
     courseDetailsBySequelizeQuery
     }
