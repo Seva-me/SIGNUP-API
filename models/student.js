@@ -24,16 +24,18 @@ module.exports = (sequelize, DataTypes) => {
     first_name:{type:DataTypes.STRING,allowNull: false},
     last_name:{type:DataTypes.STRING,allowNull: false},
     age:{type:DataTypes.INTEGER,allowNull: false},
-    roll:{type:DataTypes.INTEGER,unique:true,allowNull: false,},
+    roll_no:{type:DataTypes.INTEGER,unique:true,allowNull: false,},
     school_name: {type:DataTypes.STRING,allowNull: false},
-    blood_group: {type:DataTypes.STRING,allowNull: false},
+    blood_group: {type:DataTypes.ENUM('A+','B+','O+','O-','A-','B-','AB+','AB-'),allowNull: false},
+    address_id: {type:DataTypes.INTEGER,allowNull: true},
+    course_id: {type:DataTypes.INTEGER,allowNull: true},
     createdAt: {allowNull: false,type: DataTypes.DATE},
     updatedAt: {allowNull: false,type: DataTypes.DATE}
   }, 
   {
     sequelize,
     modelName: 'student',
-    timestamps: true
+    timeStamps: true
   });
   return student;
 };

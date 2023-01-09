@@ -4,20 +4,20 @@ const { QueryTypes } = require('sequelize');
 
 
 
-async function insertAddressData(req, res) {
+async function insertAddress(req, res) {
     try {
-        const dataInserted = await datadb.sequelize.query('insert into addresses(state,district,pincode,city,house_no,address_live)values(?,?,?,?,?,?)', { replacements: [req.body.state, req.body.district, req.body.pincode, req.body.city, req.body.houseno, req.body.addresslive], type: QueryTypes.INSERT });
-        if (dataInserted) {
-            return res.status(200).send('Data is inserted into address table ');
+        const dataInserted = await datadb.sequelize.query('insert into addresses(home,landmark,city,state,pincode,country,address_live)values(?,?,?,?,?,?,?)', { replacements: [req.body.home, req.body.landmark, req.body.city, req.body.state, req.body.pincode,req.body.country,req.body.address_live], type: QueryTypes.INSERT });
+        if (!dataInserted) {
+            return res.status(500).send('something went wrong');
         }
-        return res.status(500).send('server error');
+        return res.status(200).send('Data is inserted into address table ');
     } catch (err) {
         return res.status(500).send('something went wrong');
     }
 }
 
 
-async function updateAddressData(req, res) {
+async function updateAddress(req, res) {
     try {
         let updateQuery;
         switch (req.body.data) {
@@ -55,6 +55,6 @@ async function updateAddressData(req, res) {
 
 
 module.exports = {
-    insertAddressData,
-    updateAddressData
+    insertAddress,
+    updateAddress
 }

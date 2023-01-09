@@ -16,23 +16,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   address.init({
-    address_id: {allowNull: false,
+    id: {allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER},
-    state: {type: DataTypes.STRING,allowNull: false},
-    district:{type: DataTypes.STRING,allowNull: false},
-    pincode: {type: DataTypes.INTEGER,allowNull: false},
+    home: {type: DataTypes.STRING,allowNull: false},
+    landmark: {type: DataTypes.STRING,allowNull: false},
     city: {type: DataTypes.STRING,allowNull: false},
-    house_no:{type: DataTypes.STRING,allowNull: false},
-    address_live: DataTypes.BOOLEAN,
+    state: {type: DataTypes.STRING,allowNull: false},
+    pincode: {type: DataTypes.STRING,allowNull: false},
+    country: {type: DataTypes.STRING,allowNull: false},
+    address_live: {type:DataTypes.BOOLEAN,allowNull: false},
     createdAt: {allowNull: false,type: DataTypes.DATE,},
     updatedAt: {allowNull: false,type: DataTypes.DATE,},
   },
    {
     sequelize,
     modelName: 'address',
-    timestamps: true
+    timeStamps: true
   });
   return address;
 };

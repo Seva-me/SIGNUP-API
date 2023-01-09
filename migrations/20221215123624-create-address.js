@@ -3,29 +3,33 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('addresses', {
-      address_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      state: {
+      home: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      district: {
+      landmark: {
         type: Sequelize.STRING,
-        allowNull: false
-      },
-      pincode: {
-        type: Sequelize.INTEGER,
         allowNull: false
       },
       city: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      house_no: {
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      pincode: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      country: {
         type: Sequelize.STRING,
         allowNull: false
       },

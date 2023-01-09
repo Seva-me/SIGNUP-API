@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('students', {
-      student_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      roll: {
+      roll_no: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -35,17 +35,19 @@ module.exports = {
       },
       address_id:{
         type:Sequelize.INTEGER,
-        foreignKey:true
+        allowNull: true,
+      },
+      course_id:{
+        type:Sequelize.INTEGER,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("NOW()")
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("NOW()")
+        type: Sequelize.DATE        
       }
     });
   },

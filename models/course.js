@@ -21,12 +21,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER},
     course_name: { type:DataTypes.STRING,allowNull: false},
     course_price:{ type:DataTypes.STRING,allowNull: false},
-    createdAt: {allowNull: false,type: DataTypes.DATE,defaultValue: sequelize.literal('NOW()')},
-    updatedAt: {allowNull: false,type: DataTypes.DATE,defaultValue: sequelize.literal('NOW()')}
+    createdAt: {allowNull: false,type: DataTypes.DATE},
+    updatedAt: {allowNull: false,type: DataTypes.DATE}
   }, 
   {
     sequelize,
     modelName: 'course',
+    timeStamps: true
   });
   return course;
 };

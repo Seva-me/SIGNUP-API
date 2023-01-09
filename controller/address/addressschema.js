@@ -1,26 +1,28 @@
 const joi=require('joi');
-const addressSchema=joi.object().keys({
-    state:joi.string().min(3).pattern(new RegExp( /^[a-zA-z]+([\s][a-zA-Z]+)*$/)).required(),
-    district:joi.string().min(3).pattern(new RegExp( /^[a-zA-z]+([\s][a-zA-Z]+)*$/)).required(),
-    pincode:joi.number().integer().min(6),
-    city:joi.string().pattern(new RegExp( /^[a-zA-z]+([\s][a-zA-Z]+)*$/)).required(),
-    houseno:joi.string(),
-    addresslive:joi.boolean()
+const pattern=require('../utilities/pattern')
+const insertAddress=joi.object().keys({
+    home:joi.string().required(),
+    landmark:joi.string(),
+    city:joi.string().pattern(pattern.namePattern).required(),
+    state: joi.string().pattern( pattern.namePattern).required(),
+    pincode:joi.string().alphanum().required(),
+    country: joi.string().pattern( pattern.namePattern).required(),
+    address_live:joi.boolean().required()
 });
 
 
-const updateaddresSchema=joi.object().keys({
-    data:joi.string().pattern(new RegExp( /^[a-zA-z]*$/)).required(),
-    state:joi.string().pattern(new RegExp( /^['a-zA-z']*$/)),
-    city:joi.string().pattern(new RegExp( /^['a-zA-z']*$/)),
-    district:joi.string().pattern(new RegExp( /^['a-zA-z']*$/)),
-    houseno:joi.string(),
-    pincode:joi.number(),
-    addresslive:joi.boolean(),
-    id:joi.number().required()
+const updateAddress=joi.object().keys({
+    home:joi.string(),
+    landmark:joi.string(),
+    city:joi.string().pattern(new RegExp(pattern.namePattern)),
+    state: joi.string().pattern(new RegExp( pattern.namePattern)),
+    pincode:joi.string().alphanum().min(6).max(8),
+    country: joi.string().pattern(new RegExp( pattern.namePattern)),
+    address_live:joi.boolean(),
+    id:joi.number().integer().required()
 });
 
 module.exports={
-    addressSchema,
-    updateaddresSchema
+    insertAddress,
+    updateAddress
     }

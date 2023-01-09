@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router();
-const addressControll=require("./addresscontroller");
-const addresSchema=require('./addressschema');
+const addressController=require("./addresscontroller");
+const addressSchema=require('./addressschema');
 const validator=require('../../middlewares/validator');
 
-router.post("/insertAddressdetails",validator(addresSchema.insertAddressData),addressControll.insertAddressData);
-router.put("/updateAddressdata",validator(addresSchema.updateAddressData),addressControll.updateAddressData);
+router.post("/insert-address",validator(addressSchema.insertAddress),addressController.insertAddress);
+router.put("/update-address",validator(addressSchema.updateAddress),addressController.updateAddress);
 
 module.exports=router
