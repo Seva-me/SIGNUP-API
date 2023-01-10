@@ -2,22 +2,20 @@ const datadb = require('../../models/index');
 const { QueryTypes, DATE } = require('sequelize');
 const studentModel = require('../../models');
 const { Op } = require("sequelize");
-const { date } = require('joi');
-const { request } = require('express');
-
 
 async function insertStudent(req, res) {
     try {
-        const dataInserted = await datadb.sequelize.query('insert into students (first_name,last_name,age,roll_no,school_name,blood_group,createdAt,updatedAt) values(?,?,?,?,?,?,?,?)', { replacements: [req.body.first_name, req.body.last_name, req.body.age, req.body.roll_no, req.body.school_name, req.body.blood_group,new Date,new Date], type: QueryTypes.INSERT });
-        console.log(dataInserted)
+        let query = 'insert into students (first_name,last_name,age,roll_no,school_name,blood_group,createdAt,updatedAt) values(?,?,?,?,?,?,?,?)';
+        let replacementsValue = [req.body.first_name, req.body.last_name, req.body.age, req.body.roll_no, req.body.school_name ? req.body.school_name : null,   req.body.blood_group ? req.body.blood_group : null, new Date, new Date];   
+        const dataInserted = await datadb.sequelize.query(query, { replacements: replacementsValue, type: QueryTypes.INSERT });
         if (!dataInserted) {
             return res.status(500).send("something went wrong");
         }
-        return res.status(200).send('Data is inserted into student table ');
+        res.status(200).send("Data is inserted into student table ");
     } catch (err) {
-        console.log(err)
+        console.log("Error in inserting Student :", err);
         if(err.name=='SequelizeUniqueConstraintError'){
-            res.status(409).send("Roll Number already exist");
+            return res.status(409).send("Roll Number already exist");
         }
         res.status(500).send("Something went wrong");
     }

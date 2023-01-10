@@ -17,20 +17,52 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   student.init({
-    id: {allowNull: false,
+    id: {
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER},
-    first_name:{type:DataTypes.STRING,allowNull: false},
-    last_name:{type:DataTypes.STRING,allowNull: false},
-    age:{type:DataTypes.INTEGER,allowNull: false},
-    roll_no:{type:DataTypes.INTEGER,unique:true,allowNull: false,},
-    school_name: {type:DataTypes.STRING,allowNull: false},
-    blood_group: {type:DataTypes.ENUM('A+','B+','O+','O-','A-','B-','AB+','AB-'),allowNull: false},
-    address_id: {type:DataTypes.INTEGER,allowNull: true},
-    course_id: {type:DataTypes.INTEGER,allowNull: true},
-    createdAt: {allowNull: false,type: DataTypes.DATE},
-    updatedAt: {allowNull: false,type: DataTypes.DATE}
+      type: DataTypes.INTEGER
+    },
+    first_name: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    last_name: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    age: {
+      type:DataTypes.INTEGER,
+      allowNull: false
+    },
+    roll_no: {
+      type:DataTypes.INTEGER,
+      unique:true,allowNull: false
+    },
+    school_name: {
+      type:DataTypes.STRING,
+      allowNull: true
+    },
+    blood_group: {
+      type:DataTypes.ENUM('A+','B+','O+','O-','A-','B-','AB+','AB-'),
+      allowNull: true
+    },
+    address_id: {
+      type:DataTypes.INTEGER,
+      allowNull: true
+    },
+    course_id: {
+      type:DataTypes.INTEGER,
+      allowNull: true
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    }
   }, 
   {
     sequelize,

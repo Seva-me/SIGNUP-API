@@ -15,7 +15,7 @@ module.exports = {
       },
       landmark: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       city: {
         type: Sequelize.STRING,
@@ -35,6 +35,7 @@ module.exports = {
       },
       address_live: {
         type: Sequelize.BOOLEAN,
+        defaultValue: true,
         allowNull: false
       },
       createdAt: {

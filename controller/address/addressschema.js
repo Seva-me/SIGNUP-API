@@ -7,7 +7,7 @@ const insertAddress=joi.object().keys({
     state: joi.string().pattern( pattern.namePattern).required(),
     pincode:joi.string().alphanum().required(),
     country: joi.string().pattern( pattern.namePattern).required(),
-    address_live:joi.boolean().required()
+    address_live:joi.boolean()
 });
 
 

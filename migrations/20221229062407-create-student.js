@@ -24,14 +24,15 @@ module.exports = {
       roll_no: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        unique: true
       },
       school_name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true
       },
       blood_group: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true
       },
       address_id:{
         type:Sequelize.INTEGER,

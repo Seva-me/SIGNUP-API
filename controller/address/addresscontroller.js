@@ -1,18 +1,18 @@
 const datadb = require('../../models/index');
 const { QueryTypes } = require('sequelize');
 
-
-
-
 async function insertAddress(req, res) {
     try {
-        const dataInserted = await datadb.sequelize.query('insert into addresses(home,landmark,city,state,pincode,country,address_live)values(?,?,?,?,?,?,?)', { replacements: [req.body.home, req.body.landmark, req.body.city, req.body.state, req.body.pincode,req.body.country,req.body.address_live], type: QueryTypes.INSERT });
+        let sqlQuery = 'insert into addresses(home,landmark,city,state,pincode,country,createdAt,updatedAt,address_live)values(?,?,?,?,?,?,?,?,?)';
+        let replacementsValue=[req.body.home, req.body.landmark ? req.body.landmark : null, req.body.city, req.body.state, req.body.pincode,req.body.country,new Date,new Date,req.body.address_live ? req.body.address_live : true];
+        const dataInserted = await datadb.sequelize.query(sqlQuery, { replacements:replacementsValue , type: QueryTypes.INSERT });
         if (!dataInserted) {
             return res.status(500).send('something went wrong');
         }
-        return res.status(200).send('Data is inserted into address table ');
+        res.status(200).send('Data is inserted into address table ');
     } catch (err) {
-        return res.status(500).send('something went wrong');
+        console.log(err)
+        return res.status(500).send("Something went wrong");
     }
 }
 

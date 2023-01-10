@@ -20,15 +20,42 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER},
-    home: {type: DataTypes.STRING,allowNull: false},
-    landmark: {type: DataTypes.STRING,allowNull: false},
-    city: {type: DataTypes.STRING,allowNull: false},
-    state: {type: DataTypes.STRING,allowNull: false},
-    pincode: {type: DataTypes.STRING,allowNull: false},
-    country: {type: DataTypes.STRING,allowNull: false},
-    address_live: {type:DataTypes.BOOLEAN,allowNull: false},
-    createdAt: {allowNull: false,type: DataTypes.DATE,},
-    updatedAt: {allowNull: false,type: DataTypes.DATE,},
+    home: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    landmark: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    pincode: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    address_live: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    }
   },
    {
     sequelize,
